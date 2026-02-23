@@ -3,6 +3,8 @@
     "baseUrl": "src",
     "paths": {
       "@app/*": ["app/*"],
+      "@pages/*": ["pages/*"],
+      "@layouts/*": ["layouts/*"],
       "@shared/*": ["shared/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
