@@ -1,32 +1,44 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { RootRedirect } from '@app/router/RootRedirect';
+import { RootRoute } from '@app/router/RootRoute';
 import { AuthLayout } from '@layouts/AuthLayout';
 import { AppLayout } from '@layouts/AppLayout';
 import { AuthPage } from '@pages/AuthPage';
 import { DashboardPage } from '@pages/DashboardPage';
 import { NotFoundPage } from '@pages/NotFoundPage';
 import { ROUTES } from '@app/router/routes';
+import { AppGuard } from '@app/router/AppGuard';
+import { AuthGuard } from '@app/router/AuthGuard';
 
 export const router = createBrowserRouter([
   {
     path: ROUTES.root,
-    element: <RootRedirect />,
+    element: <RootRoute />,
   },
   {
-    element: <AuthLayout />,
+    element: <AuthGuard />,
     children: [
       {
-        path: ROUTES.auth,
-        element: <AuthPage />,
+        element: <AuthLayout />,
+        children: [
+          {
+            path: ROUTES.auth,
+            element: <AuthPage />,
+          },
+        ],
       },
     ],
   },
   {
-    element: <AppLayout />,
+    element: <AppGuard />,
     children: [
       {
-        path: ROUTES.dashboard,
-        element: <DashboardPage />,
+        element: <AppLayout />,
+        children: [
+          {
+            path: ROUTES.dashboard,
+            element: <DashboardPage />,
+          },
+        ],
       },
     ],
   },

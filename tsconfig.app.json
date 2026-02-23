@@ -5,6 +5,7 @@
       "@app/*": ["app/*"],
       "@pages/*": ["pages/*"],
       "@layouts/*": ["layouts/*"],
+      "@features/*": ["features/*"],
       "@shared/*": ["shared/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
