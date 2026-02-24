@@ -5,6 +5,7 @@
       "@app/*": ["app/*"],
       "@pages/*": ["pages/*"],
       "@layouts/*": ["layouts/*"],
+      "@entities/*": ["entities/*"],
       "@features/*": ["features/*"],
       "@shared/*": ["shared/*"]
     },

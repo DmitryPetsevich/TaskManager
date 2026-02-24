@@ -1,15 +1,13 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import type { IUserDto } from '@entities/user/user.types';
 
-type User = {
-  id: string;
-  email: string;
-};
+type SafeUser = Omit<IUserDto, 'password'>;
 
 type AuthState = {
   accessToken: string | null;
-  user: User | null;
-  login: (token: string, user: User) => void;
+  user: SafeUser | null;
+  login: (token: string, user: SafeUser) => void;
   logout: () => void;
 };
 
@@ -18,7 +16,6 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       accessToken: null,
       user: null,
-      isAuth: false,
       login: (token, user) =>
         set({
           accessToken: token,
