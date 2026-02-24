@@ -1,5 +1,7 @@
 import { useState, type SyntheticEvent } from 'react';
 import { useLogin } from '@features/auth/hooks/useLogin';
+import { TextField } from '@shared/ui/text-field/TextField';
+import { Button } from '@shared/ui/button/Button';
 
 export const LoginForm = () => {
   const loginMutation = useLogin();
@@ -17,32 +19,28 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <TextField
+        type="email"
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <TextField
+        type="password"
+        label="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      {loginMutation.isError && (
+        <div className="text-red-500 text-sm">Неверный email или пароль</div>
+      )}
 
-      <div>
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-
-      <button type="submit" disabled={loginMutation.isPending}>
-        {loginMutation.isPending ? 'Logging in...' : 'Login'}
-      </button>
-
-      {loginMutation.isError && <p>Invalid credentials</p>}
+      <Button type="submit" isLoading={loginMutation.isPending} isLoadingLabel="Вход...">
+        Войти
+      </Button>
     </form>
   );
 };
