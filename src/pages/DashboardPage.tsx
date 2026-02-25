@@ -1,7 +1,7 @@
-import { useAuthStore } from '@features/auth/model/auth.store';
+import { useLogoutAction } from '@features/auth/model/auth.store';
 
 export const DashboardPage = () => {
-  const logout = useAuthStore((state) => state.logout);
+  const logout = useLogoutAction();
   return (
     <>
       <h1>Dashboard Page</h1>
