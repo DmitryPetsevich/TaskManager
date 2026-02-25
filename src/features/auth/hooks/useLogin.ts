@@ -11,7 +11,7 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: loginRequest,
     onSuccess: ({ user, token }) => {
-      login(token, user);
+      login(user, token);
 
       navigate(ROUTES.dashboard, { replace: true });
     },

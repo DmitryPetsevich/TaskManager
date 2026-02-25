@@ -7,7 +7,7 @@ type SafeUser = Omit<IUserDto, 'password'>;
 type AuthState = {
   accessToken: string | null;
   user: SafeUser | null;
-  login: (token: string, user: SafeUser) => void;
+  login: (user: SafeUser, token: string) => void;
   logout: () => void;
 };
 
@@ -16,7 +16,7 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       accessToken: null,
       user: null,
-      login: (token, user) =>
+      login: (user, token) =>
         set({
           accessToken: token,
           user,
