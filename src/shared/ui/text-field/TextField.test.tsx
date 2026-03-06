@@ -34,7 +34,7 @@ describe('TextField:', () => {
     expect(textfield).toHaveClass('focus:ring-red-400');
   });
 
-  test('Should apply custom className', () => {
+  test('Should merge custom className', () => {
     const className = 'custom-class';
 
     render(<TextField className={className} />);
