@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { ROUTES } from '@app/router/routes';
 import { useAccessToken } from '@features/auth/model/auth.store';
 
-export const RootRoute = () => {
+export const RootRedirect = () => {
   const accessToken = useAccessToken();
 
   return accessToken ? (

@@ -1,49 +1,55 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { RootRoute } from '@app/router/RootRoute';
-import { AuthLayout } from '@layouts/AuthLayout';
-import { AppLayout } from '@layouts/AppLayout';
+import { RootLayout } from '@app/layouts/RootLayout';
+import { RootRedirect } from '@app/router/redirects/RootRedirect';
+import { AuthLayout } from '@app/layouts/AuthLayout';
+import { AppLayout } from '@app/layouts/AppLayout';
 import { AuthPage } from '@pages/AuthPage';
 import { DashboardPage } from '@pages/DashboardPage';
 import { NotFoundPage } from '@pages/NotFoundPage';
 import { ROUTES } from '@app/router/routes';
-import { AppGuard } from '@app/router/AppGuard';
-import { AuthGuard } from '@app/router/AuthGuard';
+import { AppGuard } from '@app/router/guards/AppGuard';
+import { AuthGuard } from '@app/router/guards/AuthGuard';
 
 export const router = createBrowserRouter([
   {
-    path: ROUTES.root,
-    element: <RootRoute />,
-  },
-  {
-    element: <AuthGuard />,
+    element: <RootLayout />,
     children: [
       {
-        element: <AuthLayout />,
+        index: true,
+        element: <RootRedirect />,
+      },
+      {
+        element: <AuthGuard />,
         children: [
           {
-            path: ROUTES.auth,
-            element: <AuthPage />,
+            element: <AuthLayout />,
+            children: [
+              {
+                path: ROUTES.auth,
+                element: <AuthPage />,
+              },
+            ],
           },
         ],
       },
-    ],
-  },
-  {
-    element: <AppGuard />,
-    children: [
       {
-        element: <AppLayout />,
+        element: <AppGuard />,
         children: [
           {
-            path: ROUTES.dashboard,
-            element: <DashboardPage />,
+            element: <AppLayout />,
+            children: [
+              {
+                path: ROUTES.dashboard,
+                element: <DashboardPage />,
+              },
+            ],
           },
         ],
       },
+      {
+        path: ROUTES.notFound,
+        element: <NotFoundPage />,
+      },
     ],
-  },
-  {
-    path: ROUTES.notFound,
-    element: <NotFoundPage />,
   },
 ]);
