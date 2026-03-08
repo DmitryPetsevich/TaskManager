@@ -16,7 +16,7 @@ describe('IconButton', () => {
 
     render(<IconButton data-testid={id} size="lg" icon={<span />} />);
 
-    expect(screen.getByTestId(id)).toHaveClass('h-12', 'w-12', 'p-3');
+    expect(screen.getByTestId(id)).toHaveClass('h-12', 'w-12');
   });
 
   test('Should apply right iconSize class', () => {

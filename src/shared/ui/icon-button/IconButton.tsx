@@ -6,14 +6,13 @@ type IconButtonSize = 'sm' | 'md' | 'lg';
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: ReactNode;
   size?: IconButtonSize;
-  ariaLabel?: string;
   className?: string;
 };
 
 const buttonSize: Record<IconButtonSize, string> = {
-  sm: 'h-8 w-8 p-1',
-  md: 'h-10 w-10 p-2',
-  lg: 'h-12 w-12 p-3',
+  sm: 'h-8 w-8',
+  md: 'h-10 w-10',
+  lg: 'h-12 w-12',
 };
 
 const iconSize: Record<IconButtonSize, string> = {
@@ -22,7 +21,7 @@ const iconSize: Record<IconButtonSize, string> = {
   lg: 'text-xl',
 };
 
-export const IconButton = ({ icon, size = 'md', ariaLabel = '', className, ...props }: Props) => (
+export const IconButton = ({ icon, size = 'md', className, ...props }: Props) => (
   <button
     className={clsx(
       'inline-flex items-center justify-center',
@@ -32,7 +31,6 @@ export const IconButton = ({ icon, size = 'md', ariaLabel = '', className, ...pr
       buttonSize[size],
       className,
     )}
-    aria-label={ariaLabel}
     {...props}
   >
     <span className={iconSize[size]}>{icon}</span>
