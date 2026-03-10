@@ -10,7 +10,7 @@ export const Sidebar = () => {
   return (
     <aside
       className={clsx(
-        'flex h-full flex-col',
+        'flex flex-col',
         'border-r border-gray-200',
         'bg-gray-50',
         'overflow-hidden',

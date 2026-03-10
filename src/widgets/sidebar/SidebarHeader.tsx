@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const SidebarHeader = ({ collapsed, onToggle }: Props) => (
-  <div className="flex justify-end p-1 border-b border-gray-200">
+  <div className="h-12 flex justify-end p-1 border-b border-gray-200">
     <IconButton onClick={onToggle} icon={collapsed ? <MdMenu /> : <MdClose />} />
   </div>
 );
