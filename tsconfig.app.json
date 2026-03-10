@@ -7,7 +7,8 @@
       "@layouts/*": ["layouts/*"],
       "@entities/*": ["entities/*"],
       "@features/*": ["features/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@widgets/*": ["widgets/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",

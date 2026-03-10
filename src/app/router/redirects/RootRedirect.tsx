@@ -6,7 +6,7 @@ export const RootRedirect = () => {
   const accessToken = useAccessToken();
 
   return accessToken ? (
-    <Navigate to={ROUTES.dashboard} replace />
+    <Navigate to={ROUTES.projects} replace />
   ) : (
     <Navigate to={ROUTES.auth} replace />
   );

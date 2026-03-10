@@ -6,7 +6,7 @@ export const AuthGuard = () => {
   const accessToken = useAccessToken();
 
   if (accessToken) {
-    return <Navigate to={ROUTES.dashboard} replace />;
+    return <Navigate to={ROUTES.projects} replace />;
   }
 
   return <Outlet />;

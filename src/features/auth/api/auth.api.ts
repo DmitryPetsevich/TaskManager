@@ -6,7 +6,7 @@ export const loginRequest = async ({ email, password }: { email: string; passwor
 
   const user = users.find((u) => u.email === email && u.password === password);
 
-  if (!user) throw new Error('Invalid credintails');
+  if (!user) throw new Error('Invalid credentails');
 
   const token = generateFakeToken();
   const { password: _password, ...safe } = user;

@@ -1,6 +1,6 @@
 export const ROUTES = {
   root: '/',
   auth: '/auth',
-  dashboard: '/dashboard',
+  projects: '/projects',
   notFound: '*',
 } as const;
