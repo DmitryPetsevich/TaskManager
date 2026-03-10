@@ -16,18 +16,18 @@ export const Button = ({
     {...props}
     disabled={isLoading || props.disabled}
     className={`
-        w-full
-        rounded-lg
-        bg-blue-600
-        py-2.5
-        text-white
-        font-medium
-        hover:bg-blue-700
-        transition
-        disabled:opacity-50
-        disabled:cursor-not-allowed
-        ${className}
-      `}
+      rounded-sm
+      bg-blue-900
+      py-1.5
+      px-3.5
+      text-white
+      font-medium
+      hover:opacity-90
+      cursor-pointer
+      disabled:opacity-50
+      disabled:cursor-not-allowed
+      ${className}
+    `}
   >
     {isLoading ? isLoadingLabel : children}
   </button>

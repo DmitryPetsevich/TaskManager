@@ -23,14 +23,14 @@ export const TableHeaderCell = ({
 }: TableHeaderCellProps) => (
   <th
     className={clsx(
-      'px-3 py-2 bg-gray-50',
-      'text-xs font-semibold uppercase text-gray-600',
+      'bg-gray-800',
+      'text-xs font-semibold uppercase text-white',
       sticky && 'sticky top-0 z-10',
       alignClass[align],
       className,
     )}
     {...props}
   >
-    {children}
+    <div className="min-h-10 px-4 py-2 flex items-center">{children}</div>
   </th>
 );
