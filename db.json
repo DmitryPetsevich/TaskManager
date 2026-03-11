@@ -8,6 +8,14 @@
       "password": "123456"
     }
   ],
-  "projects": [],
+  "projects": [
+    {
+      "id": "1",
+      "createdAt": "2025-08-25",
+      "description": "",
+      "status": "In Progress",
+      "title": "CRM System"
+    }
+  ],
   "tasks": []
 }
