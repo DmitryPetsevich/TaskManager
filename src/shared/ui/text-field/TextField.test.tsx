@@ -1,6 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { TextField } from '@shared/ui/text-field/TextField';
+import userEvent from '@testing-library/user-event';
 
 describe('TextField:', () => {
   test('Should render input', () => {
@@ -42,15 +43,17 @@ describe('TextField:', () => {
     expect(screen.getByRole('textbox')).toHaveClass(className);
   });
 
-  test('Should call onChange handler', () => {
+  test('Should call onChange handler', async () => {
     const mockFn = vi.fn();
+    const user = userEvent.setup();
+    const userInput = 'test';
 
     render(<TextField onChange={mockFn} />);
 
     const textfield = screen.getByRole('textbox');
 
-    fireEvent.change(textfield, { target: { value: 'test' } });
+    await user.type(textfield, 'test');
 
-    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn).toHaveBeenCalledTimes(userInput.length);
   });
 });

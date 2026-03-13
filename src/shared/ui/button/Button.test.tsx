@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Button } from '@shared/ui/button/Button';
 
 describe('Button:', () => {
@@ -23,14 +24,15 @@ describe('Button:', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  test('Should call onClick handler', () => {
+  test('Should call onClick handler', async () => {
     const mockFn = vi.fn();
+    const user = userEvent.setup();
 
     render(<Button onClick={mockFn}>Click</Button>);
 
     const button = screen.getByRole('button');
 
-    fireEvent.click(button);
+    await user.click(button);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
   });

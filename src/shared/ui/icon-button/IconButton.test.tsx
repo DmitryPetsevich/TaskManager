@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
+import userEvent from '@testing-library/user-event';
 
 describe('IconButton', () => {
   test('Should render provided icon', () => {
@@ -36,15 +37,16 @@ describe('IconButton', () => {
     expect(screen.getByTestId(id)).toHaveClass(className);
   });
 
-  test('Should call onClick handler', () => {
+  test('Should call onClick handler', async () => {
     const mockFn = vi.fn();
+    const user = userEvent.setup();
     const id = 'icon-button-test-id';
 
     render(<IconButton data-testid={id} onClick={mockFn} icon={<span />} />);
 
     const button = screen.getByTestId(id);
 
-    fireEvent.click(button);
+    await user.click(button);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
