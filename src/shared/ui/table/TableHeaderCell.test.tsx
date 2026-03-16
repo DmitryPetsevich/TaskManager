@@ -24,9 +24,9 @@ describe('TableHeaderCell', () => {
   });
 
   test('Should apply right alignment class', () => {
-    renderTableHeaderCell(<TableHeaderCell align="right" data-testid={testId} />);
+    renderTableHeaderCell(<TableHeaderCell align="right" />);
 
-    expect(screen.getByTestId(testId)).toHaveClass('text-right');
+    expect(screen.getByTestId('children-container-id')).toHaveClass('justify-end');
   });
 
   test('Should merge custom className', () => {

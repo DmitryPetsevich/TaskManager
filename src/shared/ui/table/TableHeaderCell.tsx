@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { ThHTMLAttributes } from 'react';
 
-type Align = 'left' | 'right' | 'center';
+export type Align = 'left' | 'right' | 'center';
 
 type TableHeaderCellProps = ThHTMLAttributes<HTMLTableCellElement> & {
   align?: Align;
@@ -9,9 +9,9 @@ type TableHeaderCellProps = ThHTMLAttributes<HTMLTableCellElement> & {
 };
 
 const alignClass: Record<Align, string> = {
-  left: 'text-left',
-  right: 'text-right',
-  center: 'text-center',
+  left: 'justify-start',
+  right: 'justify-end',
+  center: 'justify-center',
 };
 
 export const TableHeaderCell = ({
@@ -26,11 +26,15 @@ export const TableHeaderCell = ({
       'bg-gray-800',
       'text-xs font-semibold uppercase text-white',
       sticky && 'sticky top-0 z-10',
-      alignClass[align],
       className,
     )}
     {...props}
   >
-    <div className="min-h-10 px-4 py-2 inline-flex items-center">{children}</div>
+    <div
+      className={clsx('min-h-10 px-4 py-2 flex items-center', alignClass[align])}
+      data-testid="children-container-id"
+    >
+      {children}
+    </div>
   </th>
 );

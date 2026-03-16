@@ -20,7 +20,13 @@ export const TableBuilder = <T,>({ data, columns, getRowKey, scrollHeight }: Pro
     <TableHead>
       <TableRow>
         {columns.map((column) => (
-          <TableHeaderCell key={String(column.key)}>{column.header}</TableHeaderCell>
+          <TableHeaderCell
+            key={String(column.key)}
+            className={column.thClassName}
+            align={column.align}
+          >
+            {column.header}
+          </TableHeaderCell>
         ))}
       </TableRow>
     </TableHead>
@@ -32,13 +38,21 @@ export const TableBuilder = <T,>({ data, columns, getRowKey, scrollHeight }: Pro
               const value = row[column.key];
 
               return (
-                <TableCell key={String(column.key)}>
+                <TableCell
+                  key={String(column.key)}
+                  className={column.tdClassName}
+                  align={column.align}
+                >
                   {column.render ? column.render(value, row) : String(value)}
                 </TableCell>
               );
             }
 
-            return <TableCell key={column.key}>{column.render(row)}</TableCell>;
+            return (
+              <TableCell key={column.key} className={column.tdClassName} align={column.align}>
+                {column.render(row)}
+              </TableCell>
+            );
           })}
         </TableRow>
       ))}
