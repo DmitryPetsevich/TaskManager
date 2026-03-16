@@ -55,14 +55,14 @@ export const DialogRoot = ({ content, close }: Props) => {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
       role="dialog"
       aria-modal="true"
-      onMouseDown={(e) => {
+      onClick={(e) => {
         if (e.target === e.currentTarget) {
           close();
         }
       }}
     >
       <div
-        className="max-w-xl max-h-[80vh] overflow-auto bg-white rounded-sm shadow-md p-4"
+        className="min-w-xl max-w-[70vw] max-h-[80vh] overflow-auto bg-white rounded-sm shadow-md p-4"
         ref={dialogRef}
       >
         {content}

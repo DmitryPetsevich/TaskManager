@@ -31,6 +31,6 @@ export const TableHeaderCell = ({
     )}
     {...props}
   >
-    <div className="min-h-10 px-4 py-2 flex items-center">{children}</div>
+    <div className="min-h-10 px-4 py-2 inline-flex items-center">{children}</div>
   </th>
 );

@@ -1,6 +1,6 @@
-import type { IProjectDto } from '@entities/project/project.types';
 import { TableBuilder } from '@shared/lib/table-builder/TableBuilder';
 import { columns } from '@widgets/projects-table/ProjectsTable.config';
+import type { IProjectDto } from '@entities/project/model/types';
 
 type Props = {
   projects: IProjectDto[];

@@ -1,12 +1,15 @@
-import { Button } from '@shared/ui/button/Button';
 import { useQuery } from '@tanstack/react-query';
+import { Button } from '@shared/ui/button/Button';
 import { PageHeader } from '@shared/ui/page-header/PageHeader';
 import { ProjectsTable } from '@widgets/projects-table/ProjectsTable';
-import { projectQueries } from '@entities/project/project.queries';
 import { ProjectsSkeleton } from '@widgets/projects-table/ProjectsSkeleton';
+import { CreateProjectDialog } from '@features/project/create-project/ui/CreateProjectDialog';
+import { useDialog } from '@shared/ui/dialog/useDialog';
+import { projectQueries } from '@entities/project/api/project.queries';
 
 const ProjectsPage = () => {
   const { data = [], isPending, isFetching, isError } = useQuery(projectQueries.list());
+  const { open } = useDialog();
 
   if (isError) {
     return <>Error</>;
@@ -17,7 +20,10 @@ const ProjectsPage = () => {
       <PageHeader
         title="Projects"
         action={
-          <Button className={!isFetching && !data.length ? 'animate-pulse' : ''}>
+          <Button
+            className={!isFetching && !data.length ? 'animate-pulse' : ''}
+            onClick={() => open(<CreateProjectDialog />)}
+          >
             New Project
           </Button>
         }

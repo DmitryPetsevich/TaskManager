@@ -25,4 +25,9 @@ export default defineConfig({
       '@widgets': path.resolve(__dirname, 'src/widgets'),
     },
   },
+  server: {
+    watch: {
+      ignored: ['**/db.json'],
+    },
+  },
 });

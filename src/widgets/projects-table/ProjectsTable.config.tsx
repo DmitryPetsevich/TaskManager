@@ -1,12 +1,13 @@
-import type { IProjectDto } from '@entities/project/project.types';
-import type { TableColumn } from '@shared/lib/table-builder/TableBuilder.types';
 import { Link } from 'react-router-dom';
+import { ProjectActionsCell } from '@entities/project/ui/ProjectActionsCell';
+import type { IProjectDto } from '@entities/project/model/types';
+import type { TableColumn } from '@shared/lib/table-builder/TableBuilder.types';
 
 export const columns = [
   {
     type: 'data',
-    key: 'title',
-    header: 'Title',
+    key: 'name',
+    header: 'Name',
     render: (value, row) => <Link to={`${row.id}`}>{value}</Link>,
   },
   {
@@ -24,11 +25,6 @@ export const columns = [
     type: 'display',
     key: 'actions',
     header: '',
-    render: () => (
-      <>
-        <button>Edit</button>
-        <button>Delete</button>
-      </>
-    ),
+    render: (project) => <ProjectActionsCell project={project} />,
   },
 ] satisfies TableColumn<IProjectDto>[];

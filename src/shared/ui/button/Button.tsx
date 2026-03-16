@@ -20,6 +20,7 @@ export const Button = ({
       bg-blue-900
       py-1.5
       px-3.5
+      min-w-[96px]
       text-white
       font-medium
       hover:opacity-90
