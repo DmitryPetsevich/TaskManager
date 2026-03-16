@@ -1,4 +1,4 @@
-import { getUsers } from '@entities/user/user.api';
+import { getUsers } from '@entities/user/api/user.api';
 import { generateFakeToken } from '@shared/lib/authToken';
 
 export const loginRequest = async ({ email, password }: { email: string; password: string }) => {

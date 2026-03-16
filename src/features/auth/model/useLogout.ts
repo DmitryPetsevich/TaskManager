@@ -1,5 +1,5 @@
-import { useLogoutAction } from '@features/auth/model/auth.store';
 import { useQueryClient } from '@tanstack/react-query';
+import { useLogoutAction } from '@features/auth/model/auth.store';
 
 export const useLogout = () => {
   const logout = useLogoutAction();

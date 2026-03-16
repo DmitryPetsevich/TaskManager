@@ -1,4 +1,4 @@
-import type { IUserDto } from '@entities/user/user.types';
+import type { IUserDto } from '@entities/user/model/types';
 import { api } from '@shared/api/axios';
 
 export const getUsers = async (): Promise<IUserDto[]> => {

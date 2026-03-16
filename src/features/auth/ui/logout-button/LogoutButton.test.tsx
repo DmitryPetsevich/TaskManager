@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { LogoutButton } from '@features/auth/ui/logout-button/LogoutButton';
-import * as useLogoutModule from '@features/auth/hooks/useLogout';
+import * as useLogoutModule from '@features/auth/model/useLogout';
 
 describe('LogoutButton', () => {
   test('Should call onClick handler', async () => {
