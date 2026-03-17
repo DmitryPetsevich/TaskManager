@@ -1,15 +1,6 @@
-import { getUsers } from '@entities/user/api/user.api';
-import { generateFakeToken } from '@shared/lib/authToken';
+import { loginUser } from '@entities/user';
+import type { LoginFormValues } from '@features/auth/model/login.schema';
 
-export const loginRequest = async ({ email, password }: { email: string; password: string }) => {
-  const users = await getUsers();
-
-  const user = users.find((u) => u.email === email && u.password === password);
-
-  if (!user) throw new Error('Invalid credentails');
-
-  const token = generateFakeToken();
-  const { password: _password, ...safe } = user;
-
-  return { user: safe, token };
+export const loginRequest = async ({ email, password }: LoginFormValues) => {
+  return loginUser(email, password);
 };

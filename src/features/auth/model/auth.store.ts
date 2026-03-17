@@ -1,6 +1,6 @@
 import { create, type StateCreator } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import type { IUserDto } from '@entities/user/model/types';
+import type { IUserDto } from '@entities/user';
 
 type SafeUser = Omit<IUserDto, 'password'>;
 
