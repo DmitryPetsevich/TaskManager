@@ -1,5 +1,7 @@
-export type TaskStatus = 'In Progress' | 'Paused' | 'Done';
-export type TaskPriority = 'Low' | 'Medium' | 'High';
+import type { TASK_PRIORITIES, TASK_STATUSES } from '@entities/task/model/constants';
+
+export type TaskStatus = (typeof TASK_STATUSES)[number];
+export type TaskPriority = (typeof TASK_PRIORITIES)[number];
 
 export interface ITaskDto {
   id: string;
@@ -10,4 +12,9 @@ export interface ITaskDto {
   dependOn: string[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface UpdatedTaskDto {
+  id: string;
+  data: Partial<ITaskDto>;
 }
