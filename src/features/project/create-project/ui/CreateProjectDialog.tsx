@@ -4,18 +4,14 @@ import { useCreateProject } from '@features/project/create-project/model/useCrea
 import { ProjectForm } from '@entities/project/ui/ProjectForm';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
 import type { ProjectFormValues } from '@entities/project/model/schema';
+import { createProject } from '@entities/project/lib/createProject';
 
 export const CreateProjectDialog = () => {
   const { close } = useDialog();
   const mutation = useCreateProject();
 
   const handleSubmit = (data: ProjectFormValues) => {
-    mutation.mutate({
-      id: Date.now().toString(),
-      createdAt: new Date().toISOString(),
-      name: data.name,
-      status: 'In Progress',
-    });
+    mutation.mutate(createProject(data));
 
     close();
   };
