@@ -1,4 +1,5 @@
 import type { ITaskDto } from '@entities/task/model/types';
+import { TaskActionsCell } from '@entities/task/ui/TaskActionsCell';
 import type { TableColumn } from '@shared/lib/table-builder/TableBuilder.types';
 
 export const columns = [
@@ -38,5 +39,12 @@ export const columns = [
     header: 'Priority',
     stickyHeader: false,
     thClassName: 'w-[240px]',
+  },
+  {
+    type: 'display',
+    key: 'actions',
+    header: '',
+    render: (task) => <TaskActionsCell task={task} />,
+    align: 'right',
   },
 ] satisfies TableColumn<ITaskDto>[];
