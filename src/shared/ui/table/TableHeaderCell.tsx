@@ -23,7 +23,7 @@ export const TableHeaderCell = ({
 }: TableHeaderCellProps) => (
   <th
     className={clsx(
-      'bg-gray-800',
+      'bg-blue-900',
       'text-xs font-semibold uppercase text-white',
       sticky && 'sticky top-0 z-10',
       className,

@@ -3,6 +3,7 @@ import type { Align } from '@shared/ui/table';
 
 type TableColumnStyle = {
   align?: Align;
+  stickyHeader?: boolean;
   thClassName?: string;
   tdClassName?: string;
 };

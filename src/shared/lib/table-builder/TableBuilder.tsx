@@ -24,6 +24,7 @@ export const TableBuilder = <T,>({ data, columns, getRowKey, scrollHeight }: Pro
             key={String(column.key)}
             className={column.thClassName}
             align={column.align}
+            sticky={column.stickyHeader}
           >
             {column.header}
           </TableHeaderCell>
