@@ -10,9 +10,10 @@ import { ROUTES } from '@app/router/routes';
 import { AppGuard } from '@app/router/guards/AppGuard';
 import { AuthGuard } from '@app/router/guards/AuthGuard';
 
-const AuthPage = lazy(() => import('@pages/AuthPage'));
-const ProjectsPage = lazy(() => import('@pages/ProjectsPage'));
-const NotFoundPage = lazy(() => import('@pages/NotFoundPage'));
+const AuthPage = lazy(() => import('@pages/auth-page/AuthPage'));
+const ProjectsPage = lazy(() => import('@pages/projects-page/ProjectsPage'));
+const ProjectDetailPage = lazy(() => import('@pages/project-detail-page/ProjectDetailPage'));
+const NotFoundPage = lazy(() => import('@pages/not-found-page/NotFoundPage'));
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
               {
                 path: ROUTES.projects,
                 element: <ProjectsPage />,
+              },
+              {
+                path: ROUTES.projectDetail,
+                element: <ProjectDetailPage />,
               },
             ],
           },
