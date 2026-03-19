@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { CreateProjectDialog } from './CreateProjectDialog';
+import { CreateProjectDialog } from '@features/project/create-project/ui/create-project-dialog/CreateProjectDialog';
 import type { ProjectFormValues } from '@entities/project/model/schema';
 
 const closeMock = vi.fn();
@@ -10,7 +10,7 @@ vi.mock('@shared/ui/dialog/useDialog', () => ({
 }));
 
 const mutateMock = vi.fn();
-vi.mock('../model/useCreateProject', () => ({
+vi.mock('../../model/useCreateProject', () => ({
   useCreateProject: () => ({ mutate: mutateMock }),
 }));
 
