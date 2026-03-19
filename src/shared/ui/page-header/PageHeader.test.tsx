@@ -18,4 +18,10 @@ describe('PageHeader', () => {
 
     expect(screen.getByTestId(testId)).toBeInTheDocument();
   });
+
+  test('Should render skeleton if title is not provided', () => {
+    render(<PageHeader />);
+
+    expect(screen.getByTestId('page-header-skeleton')).toBeInTheDocument();
+  });
 });
