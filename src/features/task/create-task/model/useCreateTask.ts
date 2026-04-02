@@ -3,28 +3,25 @@ import { createTask } from '@entities/task/api/task.api';
 import { taskKeys } from '@entities/task/lib/queryKeys';
 import type { ITaskDto } from '@entities/task/model/types';
 
-export function useCreateTask() {
+export function useCreateTask(projectId: string) {
+  const queryKey = taskKeys.projectTasks(projectId);
+
   return useMutation({
     mutationFn: createTask,
-    onMutate: async (newTask, context) => {
-      const queryKey = taskKeys.projectTasks(newTask.projectId);
-
+    onMutate: async (task, context) => {
       await context.client.cancelQueries({ queryKey });
 
       const previousTasks: ITaskDto[] = context.client.getQueryData(queryKey) || [];
 
-      context.client.setQueryData(queryKey, (old: ITaskDto[] = []) => [...old, newTask]);
+      context.client.setQueryData(queryKey, (old: ITaskDto[] = []) => [...old, task]);
 
       return { previousTasks };
     },
-    onError: (_err, newTask, onMutateResult, context) => {
-      context.client.setQueryData(
-        taskKeys.projectTasks(newTask.projectId),
-        onMutateResult?.previousTasks,
-      );
+    onError: (_err, _task, onMutateResult, context) => {
+      context.client.setQueryData(queryKey, onMutateResult?.previousTasks);
     },
-    onSettled: (_data, _error, newTask, _onMutateResult, context) => {
-      context.client.invalidateQueries({ queryKey: taskKeys.projectTasks(newTask.projectId) });
+    onSettled: (_data, _error, _task, _onMutateResult, context) => {
+      context.client.invalidateQueries({ queryKey });
     },
   });
 }

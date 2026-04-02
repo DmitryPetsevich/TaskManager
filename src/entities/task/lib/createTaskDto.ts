@@ -1,7 +1,7 @@
 import type { ITaskDto } from '@entities/task/model/types';
 import type { TaskFormValues } from '@entities/task/model/schema';
 
-export const createTask = (projectId: string, data: TaskFormValues): ITaskDto => {
+export const createTaskDto = (projectId: string, data: TaskFormValues): ITaskDto => {
   const now = new Date().toISOString();
 
   return {
@@ -10,7 +10,7 @@ export const createTask = (projectId: string, data: TaskFormValues): ITaskDto =>
     name: data.name,
     createdAt: now,
     updatedAt: now,
-    dependOn: [],
+    dependOn: data.dependOn || [],
     status: data.status,
     priority: data.priority,
   };
