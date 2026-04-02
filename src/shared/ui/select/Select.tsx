@@ -1,20 +1,34 @@
 import clsx from 'clsx';
 import { createPortal } from 'react-dom';
-import { useState, useRef, useEffect, type CSSProperties, useCallback } from 'react';
+import { useState, useRef, useEffect, type CSSProperties, useCallback, useMemo } from 'react';
 
-interface Option {
+interface SelectOption {
   label: string;
   value: string;
 }
 
-interface SelectProps {
+type SelectBaseProps = {
   label: string;
-  options: Option[];
-  value?: string;
+  options: SelectOption[];
   error?: string;
-  onChange?: (value: string) => void;
   placeholder?: string;
-}
+  closeOnSelect?: boolean;
+  maxVisibleTags?: number;
+};
+
+type SelectSingleProps = {
+  multiple?: false;
+  value?: string;
+  onChange?: (value: string) => void;
+};
+
+type SelectMultipleProps = {
+  multiple: true;
+  value?: string[];
+  onChange?: (value: string[]) => void;
+};
+
+type SelectProps = SelectBaseProps & (SelectSingleProps | SelectMultipleProps);
 
 export const Select = ({
   options,
@@ -23,30 +37,68 @@ export const Select = ({
   onChange,
   error,
   placeholder = 'Select...',
+  multiple,
+  closeOnSelect,
+  maxVisibleTags = 3,
 }: SelectProps) => {
+  const isMultiple = multiple === true;
+
+  const shouldCloseOnSelect = closeOnSelect ?? !isMultiple;
+
   const [isOpen, setIsOpen] = useState(false);
+
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
   const [dropdownStyles, setDropdownStyles] = useState<CSSProperties>({});
 
-  const selectedOption = options.find((opt) => opt.value === value);
+  const selectedValues = useMemo<string[]>(() => {
+    if (!value) return [];
+    return Array.isArray(value) ? value : [value];
+  }, [value]);
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
+  const selectedLabels = useMemo(() => {
+    const set = new Set(selectedValues);
 
-  const handleSelect = (option: Option) => {
-    if (onChange) {
-      onChange(option.value);
-    }
-    setIsOpen(false);
-  };
+    return options.filter((opt) => set.has(opt.value)).map((opt) => opt.label);
+  }, [options, selectedValues]);
+
+  const toggleDropdown = useCallback(() => {
+    if (!options.length) return;
+
+    setIsOpen((prev) => !prev);
+  }, [options.length]);
+
+  const handleSelect = useCallback(
+    (option: SelectOption) => {
+      const set = new Set(selectedValues);
+      const exists = set.has(option.value);
+
+      if (isMultiple) {
+        const newValue = exists
+          ? selectedValues.filter((v) => v !== option.value)
+          : [...selectedValues, option.value];
+
+        onChange?.(newValue);
+      } else {
+        onChange?.(option.value);
+      }
+
+      if (shouldCloseOnSelect) {
+        setIsOpen(false);
+      }
+    },
+    [onChange, isMultiple, selectedValues, shouldCloseOnSelect],
+  );
 
   const updatePosition = useCallback(() => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
+
       setDropdownStyles({
-        position: 'absolute',
-        top: rect.bottom + window.scrollY + 8,
-        left: rect.left + window.scrollX,
+        position: 'fixed',
+        top: rect.bottom + 8,
+        left: rect.left,
         width: rect.width,
         zIndex: 9999,
       });
@@ -56,6 +108,7 @@ export const Select = ({
   useEffect(() => {
     if (isOpen) {
       updatePosition();
+
       window.addEventListener('scroll', updatePosition);
       window.addEventListener('resize', updatePosition);
     }
@@ -79,56 +132,76 @@ export const Select = ({
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const displayValue = useMemo(() => {
+    if (options.length === 0) return 'No options';
+
+    if (selectedLabels.length === 0) return placeholder;
+
+    if (!isMultiple) return selectedLabels[0];
+
+    const visible = selectedLabels.slice(0, maxVisibleTags);
+    const rest = selectedLabels.length - visible.length;
+
+    return rest > 0 ? `${visible.join(', ')} +${rest}` : visible.join(', ');
+  }, [selectedLabels, isMultiple, maxVisibleTags, placeholder, options.length]);
 
   return (
     <div className="flex flex-col gap-1 mb-4 last:mb-0">
       <span className="text-sm text-gray-400">{label}</span>
+
       <button
         type="button"
         ref={buttonRef}
         onClick={toggleDropdown}
+        disabled={options.length === 0}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls="select-dropdown"
         className={clsx(
           'w-full px-4 py-2.5 bg-white/20 border border-gray-400 rounded-sm text-left',
           'focus:outline-none focus:ring-2 focus:ring-blue-800',
           error && 'border-red-500 focus:ring-red-500',
-          !selectedOption && 'text-gray-400 italic',
+          selectedValues.length === 0 && 'text-gray-400 italic',
         )}
-        data-testid="select-button-id"
       >
-        {selectedOption ? selectedOption.label : placeholder}
+        {displayValue}
       </button>
 
-      {error && (
-        <span className="text-sm text-red-500" data-testid="select-error-id">
-          {error}
-        </span>
-      )}
+      {error && <span className="text-sm text-red-500">{error}</span>}
 
       {isOpen &&
         createPortal(
           <div
             ref={dropdownRef}
+            id="select-dropdown"
             style={dropdownStyles}
             className="bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-auto"
-            tabIndex={-1}
-            data-testid="select-dropdown-id"
+            role="listbox"
+            aria-multiselectable={isMultiple || undefined}
           >
-            {options.map((option) => (
-              <div
-                key={option.value}
-                onClick={() => handleSelect(option)}
-                className={clsx(
-                  'px-4 py-2 cursor-pointer hover:bg-gray-100',
-                  selectedOption?.value === option.value && 'bg-blue-100',
-                )}
-                data-testid="select-option-id"
-              >
-                {option.label}
-              </div>
-            ))}
+            {options.map((option) => {
+              const selected = selectedValues.includes(option.value);
+
+              return (
+                <div
+                  key={option.value}
+                  onClick={() => handleSelect(option)}
+                  role="option"
+                  aria-selected={selected}
+                  className={clsx(
+                    'px-4 py-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between',
+                    selected && 'bg-blue-100',
+                  )}
+                >
+                  <span>{option.label}</span>
+
+                  {isMultiple && selected && <span>✓</span>}
+                </div>
+              );
+            })}
           </div>,
           document.body,
         )}
