@@ -18,10 +18,15 @@ const ProjectDetailPage = () => {
     data: taskData = [],
     isFetching: isTFetching,
     isPending: isTPending,
+    isError: isTError,
   } = useQuery({
     ...taskQueries.tasksByProjectId(params.id!),
     enabled: !!params.id,
   });
+
+  if (isTError) {
+    throw new Error('Tasks are failed to load');
+  }
 
   return (
     <>

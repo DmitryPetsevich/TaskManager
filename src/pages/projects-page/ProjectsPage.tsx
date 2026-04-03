@@ -8,7 +8,7 @@ const ProjectsPage = () => {
   const { data = [], isPending, isFetching, isError } = useQuery(projectQueries.list());
 
   if (isError) {
-    return <>Error</>;
+    throw new Error('Pojects are failed to load');
   }
 
   return (

@@ -9,6 +9,7 @@ import { AppLayout } from '@app/layouts/AppLayout';
 import { ROUTES } from '@app/router/routes';
 import { AppGuard } from '@app/router/guards/AppGuard';
 import { AuthGuard } from '@app/router/guards/AuthGuard';
+import { DefaultErrorElement } from '@shared/ui/default-error-element/DefaultErrorElement';
 
 const AuthPage = lazy(() => import('@pages/auth-page/AuthPage'));
 const ProjectsPage = lazy(() => import('@pages/projects-page/ProjectsPage'));
@@ -18,6 +19,7 @@ const NotFoundPage = lazy(() => import('@pages/not-found-page/NotFoundPage'));
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <DefaultErrorElement />,
     children: [
       {
         index: true,
@@ -46,10 +48,12 @@ export const router = createBrowserRouter([
               {
                 path: ROUTES.projects,
                 element: <ProjectsPage />,
+                errorElement: <DefaultErrorElement />,
               },
               {
                 path: ROUTES.projectDetail,
                 element: <ProjectDetailPage />,
+                errorElement: <DefaultErrorElement />,
               },
             ],
           },
