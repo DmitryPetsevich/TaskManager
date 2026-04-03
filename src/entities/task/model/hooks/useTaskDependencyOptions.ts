@@ -1,4 +1,4 @@
-import { useTasksFromQueryCache } from '@entities/task/lib/hooks/useTasksFromQueryCache';
+import { useTasksFromQueryCache } from '@entities/task/model/hooks/useTasksFromQueryCache';
 
 export function useTaskDependencyOptions(projectId: string, taskId?: string) {
   const tasks = useTasksFromQueryCache(projectId);

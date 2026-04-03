@@ -4,14 +4,14 @@ import { useCreateProject } from '@features/project/create-project/model/useCrea
 import { ProjectForm } from '@entities/project/ui/ProjectForm';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
 import type { ProjectFormValues } from '@entities/project/model/schema';
-import { createProject } from '@entities/project/lib/createProject';
+import { createProjectDto } from '@entities/project/lib/createProjectDto';
 
 export const CreateProjectDialog = () => {
   const { close } = useDialog();
   const mutation = useCreateProject();
 
   const handleSubmit = (data: ProjectFormValues) => {
-    mutation.mutate(createProject(data));
+    mutation.mutate(createProjectDto(data));
 
     close();
   };

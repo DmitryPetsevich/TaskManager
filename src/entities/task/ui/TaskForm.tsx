@@ -5,22 +5,18 @@ import { TextField } from '@shared/ui/text-field/TextField';
 import { Select } from '@shared/ui/select/Select';
 import { createTaskSchema, type TaskFormValues } from '@entities/task/model/schema';
 import { priorityOptions, statusOptions } from '@entities/task/model/constants';
-import { useCreateTask } from '@features/task/create-task/model/useCreateTask';
-import { createTaskDto } from '@entities/task/lib/createTaskDto';
-import { useDialog } from '@shared/ui/dialog/useDialog';
 import { createTaskInitialValues } from '@entities/task/model/initialValues';
-import { useTasksFromQueryCache } from '@entities/task/lib/hooks/useTasksFromQueryCache';
-import { useTaskDependencyOptions } from '@entities/task/lib/hooks/useTaskDependencyOptions';
+import { useTasksFromQueryCache } from '@entities/task/model/hooks/useTasksFromQueryCache';
+import { useTaskDependencyOptions } from '@entities/task/model/hooks/useTaskDependencyOptions';
 import type { ITaskDto } from '@entities/task/model/types';
-import { useUpdateTask } from '@features/task/update-task/model/useUpdateTask';
-import { createUpdatedTaskDto } from '@entities/task/lib/createUpdatedTaskDto';
 
 type Props = {
   projectId: string;
+  onSubmit: (data: TaskFormValues) => void;
   task?: ITaskDto;
 };
 
-export const TaskForm = ({ projectId, task }: Props) => {
+export const TaskForm = ({ projectId, onSubmit, task }: Props) => {
   const tasks = useTasksFromQueryCache(projectId);
   const taskDepsOptions = useTaskDependencyOptions(projectId, task?.id);
 
@@ -28,20 +24,6 @@ export const TaskForm = ({ projectId, task }: Props) => {
     resolver: zodResolver(createTaskSchema(tasks, task)),
     defaultValues: createTaskInitialValues(task),
   });
-
-  const { close } = useDialog();
-  const createTaskMutation = useCreateTask(projectId);
-  const updateTaskMutation = useUpdateTask(projectId);
-
-  const onSubmit = (data: TaskFormValues) => {
-    if (task) {
-      updateTaskMutation.mutate({ id: task.id, data: createUpdatedTaskDto(task, data) });
-    } else {
-      createTaskMutation.mutate(createTaskDto(projectId, data));
-    }
-
-    close();
-  };
 
   const { register, handleSubmit, formState, control } = form;
 
@@ -93,7 +75,7 @@ export const TaskForm = ({ projectId, task }: Props) => {
         )}
       />
       <div className="flex pt-2 justify-end">
-        <Button type="submit">Create</Button>
+        <Button type="submit">OK</Button>
       </div>
     </form>
   );

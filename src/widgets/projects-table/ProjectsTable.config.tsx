@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ProjectActionsCell } from '@entities/project/ui/ProjectActionsCell';
+import { ProjectActionCell } from '@widgets/projects-table/ui/project-action-cell/ProjectActionCell';
 import type { IProjectDto } from '@entities/project/model/types';
 import type { TableColumn } from '@shared/lib/table-builder/TableBuilder.types';
 
@@ -32,7 +32,7 @@ export const columns = [
     type: 'display',
     key: 'actions',
     header: '',
-    render: (project) => <ProjectActionsCell project={project} />,
+    render: (project) => <ProjectActionCell project={project} />,
     align: 'right',
   },
 ] satisfies TableColumn<IProjectDto>[];

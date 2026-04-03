@@ -6,7 +6,7 @@ type Props = {
   project: IProjectDto;
 };
 
-export const ProjectActionsCell = ({ project }: Props) => {
+export const ProjectActionCell = ({ project }: Props) => {
   return (
     <>
       <UpdateProjectStatusButton project={project} />

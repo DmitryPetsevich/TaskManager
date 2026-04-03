@@ -1,5 +1,5 @@
+import { TaskActionCell } from '@widgets/tasks-table/ui/task-action-cell/TaskActionCell';
 import type { ITaskDto } from '@entities/task/model/types';
-import { TaskActionsCell } from '@entities/task/ui/TaskActionsCell';
 import type { TableColumn } from '@shared/lib/table-builder/TableBuilder.types';
 
 export const columns = [
@@ -44,7 +44,8 @@ export const columns = [
     type: 'display',
     key: 'actions',
     header: '',
-    render: (task) => <TaskActionsCell task={task} />,
+    stickyHeader: false,
+    render: (task) => <TaskActionCell task={task} />,
     align: 'right',
   },
 ] satisfies TableColumn<ITaskDto>[];

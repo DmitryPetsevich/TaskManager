@@ -6,7 +6,7 @@ type Props = {
   task: ITaskDto;
 };
 
-export const TaskActionsCell = ({ task }: Props) => {
+export const TaskActionCell = ({ task }: Props) => {
   return (
     <>
       <UpdateTaskButton task={task} />
