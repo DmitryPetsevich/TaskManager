@@ -1,15 +1,15 @@
-import { buildDAGraph } from '@entities/task/lib/graph/buildDAGraph';
-import { getComponents } from '@entities/task/lib/graph/getComponents';
-import { topoSort } from '@entities/task/lib/graph/topologicalSort';
-import type { ITaskDto } from '@entities/task/model/types';
+import type { TaskDTO } from '../../model/types';
+import { buildDAGraph } from './buildDAGraph';
+import { getComponents } from './getComponents';
+import { topologicalSort } from './topologicalSort';
 
-export function groupAndSort(tasks: ITaskDto[]): ITaskDto[][] {
+export function groupAndSort(tasks: TaskDTO[]): TaskDTO[][] {
   const graph = buildDAGraph(tasks);
   const components = getComponents(graph);
 
   return components.map((componentIds) => {
     const group = tasks.filter((t) => componentIds.includes(t.id));
 
-    return topoSort(group);
+    return topologicalSort(group);
   });
 }

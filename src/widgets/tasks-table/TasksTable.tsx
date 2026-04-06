@@ -1,11 +1,11 @@
-import type { ITaskDto } from '@entities/task/model/types';
+import type { TaskDTO } from '@entities/task';
 import { TableBuilder } from '@shared/lib/table-builder/TableBuilder';
 import { TableSkeleton } from '@shared/ui/table-skeleton/TableSkeleton';
 import { columns } from '@widgets/tasks-table/TasksTable.config';
 
 type Props = {
   isPendingData: boolean;
-  data: ITaskDto[][];
+  data: TaskDTO[][];
 };
 
 export const TasksTable = ({ isPendingData, data = [] }: Props) => {

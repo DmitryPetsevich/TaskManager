@@ -1,9 +1,9 @@
 import { DeleteProjectButton } from '@features/project/delete-project/ui/DeleteProjectButton';
 import { UpdateProjectStatusButton } from '@features/project/update-project/ui/UpdateProjectStatusButton';
-import type { IProjectDto } from '@entities/project/model/types';
+import type { ProjectDTO } from '@entities/project';
 
 type Props = {
-  project: IProjectDto;
+  project: ProjectDTO;
 };
 
 export const ProjectActionCell = ({ project }: Props) => {

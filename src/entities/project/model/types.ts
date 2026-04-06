@@ -1,13 +1,14 @@
 export type ProjectStatus = 'In Progress' | 'Paused' | 'Done';
 
-export interface IProjectDto {
+// NOTE: json-server requires full entity so I use only DTO-model
+export type ProjectDTO = {
   id: string;
   createdAt: string;
   status: ProjectStatus;
   name: string;
-}
+};
 
-export interface UpdateProjectDto {
+export type UpdateProjectPayload = {
   id: string;
-  data: Partial<IProjectDto>;
-}
+  data: Partial<Pick<ProjectDTO, 'name' | 'status'>>;
+};

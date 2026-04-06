@@ -1,10 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { createProject } from '@entities/project/api/project.api';
-import { projectKeys } from '@entities/project/lib/queryKeys';
-import type { IProjectDto } from '@entities/project/model/types';
+import { createProject, projectQueryKeys, type ProjectDTO } from '@entities/project';
 
 export function useCreateProject() {
-  const queryKey = projectKeys.list();
+  const queryKey = projectQueryKeys.list();
 
   return useMutation({
     mutationFn: createProject,
@@ -13,7 +11,7 @@ export function useCreateProject() {
 
       const previousProjects = context.client.getQueryData(queryKey);
 
-      context.client.setQueryData(queryKey, (old: IProjectDto[] = []) => [...old, newProject]);
+      context.client.setQueryData(queryKey, (old: ProjectDTO[] = []) => [...old, newProject]);
 
       return { previousProjects };
     },

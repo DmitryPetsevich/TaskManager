@@ -1,9 +1,9 @@
 import { api } from '@shared/api/axios';
 import { generateFakeToken } from '@shared/lib/authToken';
-import type { IUserDto } from '@entities/user/model/types';
+import type { UserDTO } from '../model/types';
 
-const getUsers = async (): Promise<IUserDto[]> => {
-  const response = await api.get<IUserDto[]>('/users');
+const getUsers = async (): Promise<UserDTO[]> => {
+  const response = await api.get<UserDTO[]>('/users');
 
   return response.data;
 };

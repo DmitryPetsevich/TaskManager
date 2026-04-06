@@ -1,26 +1,24 @@
 import { useMutation } from '@tanstack/react-query';
-import { deleteTask, updateTask } from '@entities/task/api/task.api';
-import { taskKeys } from '@entities/task/lib/queryKeys';
-import type { ITaskDto } from '@entities/task/model/types';
+import { taskQueryKeys, deleteTask, updateTask, type TaskDTO } from '@entities/task';
 
-export function useDeleteTask() {
+export function useDeleteTask(projectId: string) {
+  const queryKey = taskQueryKeys.projectTasks(projectId);
+
   return useMutation({
     mutationFn: deleteTask,
-    onMutate: async (task, context) => {
-      const queryKey = taskKeys.projectTasks(task.projectId);
-
+    onMutate: async (taskId, context) => {
       await context.client.cancelQueries({ queryKey });
 
-      const previousTasks: ITaskDto[] = context.client.getQueryData(queryKey) || [];
+      const previousTasks: TaskDTO[] = context.client.getQueryData(queryKey) || [];
 
-      const affected = previousTasks.filter((t) => t.dependOn.includes(task.id));
+      const affected = previousTasks.filter((t) => t.dependOn.includes(taskId));
 
-      context.client.setQueryData(queryKey, (old: ITaskDto[]) =>
+      context.client.setQueryData(queryKey, (old: TaskDTO[]) =>
         old
-          .filter((t) => t.id !== task.id)
+          .filter((t) => t.id !== taskId)
           .map((t) => ({
             ...t,
-            dependOn: t.dependOn.filter((dep) => dep !== task.id),
+            dependOn: t.dependOn.filter((dep) => dep !== taskId),
           })),
       );
 
@@ -28,21 +26,18 @@ export function useDeleteTask() {
         affected.map((t) =>
           updateTask({
             id: t.id,
-            data: { dependOn: t.dependOn.filter((dep) => dep !== task.id) },
+            data: { dependOn: t.dependOn.filter((dep) => dep !== taskId) },
           }),
         ),
       );
 
       return { previousTasks };
     },
-    onError: (_err, task, onMutateResult, context) => {
-      context.client.setQueryData(
-        taskKeys.projectTasks(task.projectId),
-        onMutateResult?.previousTasks,
-      );
+    onError: (_err, _task, onMutateResult, context) => {
+      context.client.setQueryData(queryKey, onMutateResult?.previousTasks);
     },
-    onSettled: (_data, _error, task, _onMutateResult, context) => {
-      context.client.invalidateQueries({ queryKey: taskKeys.projectTasks(task.projectId) });
+    onSettled: (_data, _error, _task, _onMutateResult, context) => {
+      context.client.invalidateQueries({ queryKey });
     },
   });
 }

@@ -1,2 +1,5 @@
-export type { IUserDto } from './model/types';
+// api
 export { loginUser } from './api/user.api';
+
+// model
+export type { UserDTO } from './model/types';

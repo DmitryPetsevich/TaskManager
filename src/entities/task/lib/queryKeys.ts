@@ -1,4 +1,4 @@
-export const taskKeys = {
+export const taskQueryKeys = {
   all: ['tasks'] as const,
-  projectTasks: (projectId: string) => [...taskKeys.all, projectId] as const,
+  projectTasks: (projectId: string) => [...taskQueryKeys.all, 'project', projectId] as const,
 };

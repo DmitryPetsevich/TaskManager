@@ -1,10 +1,10 @@
 import { MdClose } from 'react-icons/md';
 import { useDialog } from '@shared/ui/dialog/useDialog';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
-import { TaskForm } from '@entities/task/ui/TaskForm';
-import { useCreateTask } from '@features/task/create-task/model/useCreateTask';
-import type { TaskFormValues } from '@entities/task/model/schema';
-import { createTaskDto } from '@entities/task/lib/createTaskDto';
+import { schema, TaskForm, useTaskDependencyOptions, type TaskFormInput } from '@entities/task';
+import { useCreateTask } from '../model/useCreateTask';
+import { createTaskData } from '../lib/createTaskData';
+import { createInitialValues } from '../lib/createInitialValues';
 
 type Props = {
   projectId: string;
@@ -13,9 +13,11 @@ type Props = {
 export const CreateTaskDialog = ({ projectId }: Props) => {
   const { close } = useDialog();
   const createTaskMutation = useCreateTask(projectId);
+  const defaultValues = createInitialValues();
+  const taskDepsOptions = useTaskDependencyOptions(projectId);
 
-  const handleSubmit = (data: TaskFormValues) => {
-    createTaskMutation.mutate(createTaskDto(projectId, data));
+  const handleSubmit = (data: TaskFormInput) => {
+    createTaskMutation.mutate(createTaskData(projectId, data));
     close();
   };
 
@@ -25,7 +27,12 @@ export const CreateTaskDialog = ({ projectId }: Props) => {
         <h2 className="text-2xl font-semibold ">Create New Task</h2>
         <IconButton className="shrink-0" onClick={close} icon={<MdClose />} />
       </div>
-      <TaskForm projectId={projectId} onSubmit={handleSubmit} />
+      <TaskForm
+        schema={schema}
+        defaultValues={defaultValues}
+        taskDepsOptions={taskDepsOptions}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };

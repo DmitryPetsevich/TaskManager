@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import { createPortal } from 'react-dom';
 import { useState, useRef, useEffect, type CSSProperties, useCallback, useMemo } from 'react';
 
-interface SelectOption {
+export type SelectOption = {
   label: string;
   value: string;
-}
+};
 
 type SelectBaseProps = {
   label: string;

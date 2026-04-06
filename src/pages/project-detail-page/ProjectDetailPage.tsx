@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { projectQueries } from '@entities/project/api/project.queries';
-import { taskQueries } from '@entities/task/api/task.queries';
+import { projectQueries } from '@entities/project';
+import { taskQueries } from '@entities/task';
 import { PageHeader } from '@shared/ui/page-header/PageHeader';
 import { TasksTable } from '@widgets/tasks-table/TasksTable';
 import { CreateTaskButton } from '@features/task/create-task/ui/CreateTaskButton';

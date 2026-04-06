@@ -1,8 +1,8 @@
 import { create, type StateCreator } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import type { IUserDto } from '@entities/user';
+import type { UserDTO } from '@entities/user';
 
-type SafeUser = Omit<IUserDto, 'password'>;
+type SafeUser = Omit<UserDTO, 'password'>;
 
 interface IInitialState {
   accessToken: string | null;

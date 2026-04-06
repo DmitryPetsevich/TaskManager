@@ -4,20 +4,20 @@ import { IconButton } from '@shared/ui/icon-button/IconButton';
 import { ConfirmDialog } from '@shared/ui/confirm-dialog/ConfirmDialog';
 import { useDeleteTask } from '@features/task/delete-task/model/useDeleteTask';
 import { useDialog } from '@shared/ui/dialog/useDialog';
-import type { ITaskDto } from '@entities/task/model/types';
+import type { TaskDTO } from '@entities/task';
 
 type Props = {
-  task: ITaskDto;
+  task: TaskDTO;
 };
 
 export const DeleteTaskButton = ({ task }: Props) => {
   const { open, close } = useDialog();
-  const { mutate } = useDeleteTask();
+  const deleteMutation = useDeleteTask(task.projectId);
 
   const handleDelete = useCallback(() => {
-    mutate(task);
+    deleteMutation.mutate(task.id);
     close();
-  }, [task, mutate, close]);
+  }, [task.id, deleteMutation, close]);
 
   const handleClick = useCallback(() => {
     open(

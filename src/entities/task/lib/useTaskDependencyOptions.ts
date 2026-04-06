@@ -1,7 +1,7 @@
-import { useTasksFromQueryCache } from '@entities/task/model/hooks/useTasksFromQueryCache';
+import { useCachedTasks } from './useCachedTasks';
 
 export function useTaskDependencyOptions(projectId: string, taskId?: string) {
-  const tasks = useTasksFromQueryCache(projectId);
+  const tasks = useCachedTasks(projectId);
 
   return tasks
     .filter((t) => t.id !== taskId)

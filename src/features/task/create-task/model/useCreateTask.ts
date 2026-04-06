@@ -1,19 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
-import { createTask } from '@entities/task/api/task.api';
-import { taskKeys } from '@entities/task/lib/queryKeys';
-import type { ITaskDto } from '@entities/task/model/types';
+import { createTask, taskQueryKeys, type TaskDTO } from '@entities/task';
 
 export function useCreateTask(projectId: string) {
-  const queryKey = taskKeys.projectTasks(projectId);
+  const queryKey = taskQueryKeys.projectTasks(projectId);
 
   return useMutation({
     mutationFn: createTask,
     onMutate: async (task, context) => {
       await context.client.cancelQueries({ queryKey });
 
-      const previousTasks: ITaskDto[] = context.client.getQueryData(queryKey) || [];
+      const previousTasks: TaskDTO[] = context.client.getQueryData(queryKey) || [];
 
-      context.client.setQueryData(queryKey, (old: ITaskDto[] = []) => [...old, task]);
+      context.client.setQueryData(queryKey, (old: TaskDTO[] = []) => [...old, task]);
 
       return { previousTasks };
     },

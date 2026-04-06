@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
-export const projectSchema = z.object({
+export const schema = z.object({
   name: z.string().trim().min(3, 'Project name must contain at least 3 characters'),
 });
 
-export type ProjectFormValues = z.infer<typeof projectSchema>;
+export type ProjectFormSchema = typeof schema;
+
+export type ProjectFormInput = z.input<typeof schema>;

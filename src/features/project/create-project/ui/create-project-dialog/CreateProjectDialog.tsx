@@ -1,17 +1,16 @@
 import { MdClose } from 'react-icons/md';
 import { useDialog } from '@shared/ui/dialog/useDialog';
 import { useCreateProject } from '@features/project/create-project/model/useCreateProject';
-import { ProjectForm } from '@entities/project/ui/ProjectForm';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
-import type { ProjectFormValues } from '@entities/project/model/schema';
-import { createProjectDto } from '@entities/project/lib/createProjectDto';
+import { ProjectForm, type ProjectFormInput } from '@entities/project';
+import { createProjectData } from '@features/project/create-project/lib/createProjectData';
 
 export const CreateProjectDialog = () => {
   const { close } = useDialog();
   const mutation = useCreateProject();
 
-  const handleSubmit = (data: ProjectFormValues) => {
-    mutation.mutate(createProjectDto(data));
+  const handleSubmit = (data: ProjectFormInput) => {
+    mutation.mutate(createProjectData(data));
 
     close();
   };

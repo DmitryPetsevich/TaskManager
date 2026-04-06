@@ -1,5 +1,5 @@
-export const projectKeys = {
+export const projectQueryKeys = {
   all: ['projects'] as const,
-  list: () => [...projectKeys.all, 'list'] as const,
-  detail: (id: string) => [...projectKeys.all, 'detail', id] as const,
+  list: () => [...projectQueryKeys.all, 'list'] as const,
+  detail: (id: string) => [...projectQueryKeys.all, 'detail', id] as const,
 };

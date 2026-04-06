@@ -1,7 +1,6 @@
-import type { ITaskDto } from '@entities/task/model/types';
-import type { TaskFormValues } from '@entities/task/model/schema';
+import type { TaskDTO, TaskFormInput } from '@entities/task';
 
-export const createTaskDto = (projectId: string, data: TaskFormValues): ITaskDto => {
+export const createTaskData = (projectId: string, data: TaskFormInput): TaskDTO => {
   const now = new Date().toISOString();
 
   return {

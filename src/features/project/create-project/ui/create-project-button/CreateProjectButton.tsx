@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { useCallback } from 'react';
 import { useDialog } from '@shared/ui/dialog/useDialog';
 import { Button } from '@shared/ui/button/Button';
 import { CreateProjectDialog } from '@features/project/create-project/ui/create-project-dialog/CreateProjectDialog';
@@ -12,12 +11,12 @@ type Props = {
 export const CreateProjectButton = ({ isPulse = false, disabled = false }: Props) => {
   const { open } = useDialog();
 
-  const handleClick = useCallback(() => {
-    open(<CreateProjectDialog />);
-  }, [open]);
-
   return (
-    <Button onClick={handleClick} disabled={disabled} className={clsx(isPulse && 'animate-pulse')}>
+    <Button
+      disabled={disabled}
+      className={clsx(isPulse && 'animate-pulse')}
+      onClick={() => open(<CreateProjectDialog />)}
+    >
       New Project
     </Button>
   );

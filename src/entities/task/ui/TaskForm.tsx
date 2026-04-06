@@ -2,27 +2,22 @@ import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@shared/ui/button/Button';
 import { TextField } from '@shared/ui/text-field/TextField';
-import { Select } from '@shared/ui/select/Select';
-import { createTaskSchema, type TaskFormValues } from '@entities/task/model/schema';
-import { priorityOptions, statusOptions } from '@entities/task/model/constants';
-import { createTaskInitialValues } from '@entities/task/model/initialValues';
-import { useTasksFromQueryCache } from '@entities/task/model/hooks/useTasksFromQueryCache';
-import { useTaskDependencyOptions } from '@entities/task/model/hooks/useTaskDependencyOptions';
-import type { ITaskDto } from '@entities/task/model/types';
+import { Select, type SelectOption } from '@shared/ui/select/Select';
+import { type TaskFormInput, type TaskFormSchema } from '../model/schema';
+import { TASK_PRIORITIES, TASK_STATUSES } from '../model/constants';
+import { mapToOptions } from '@shared/lib/mapToOptions';
 
 type Props = {
-  projectId: string;
-  onSubmit: (data: TaskFormValues) => void;
-  task?: ITaskDto;
+  schema: TaskFormSchema;
+  defaultValues?: TaskFormInput;
+  taskDepsOptions?: SelectOption[];
+  onSubmit: (data: TaskFormInput) => void;
 };
 
-export const TaskForm = ({ projectId, onSubmit, task }: Props) => {
-  const tasks = useTasksFromQueryCache(projectId);
-  const taskDepsOptions = useTaskDependencyOptions(projectId, task?.id);
-
-  const form = useForm<TaskFormValues>({
-    resolver: zodResolver(createTaskSchema(tasks, task)),
-    defaultValues: createTaskInitialValues(task),
+export const TaskForm = ({ schema, defaultValues, taskDepsOptions = [], onSubmit }: Props) => {
+  const form = useForm<TaskFormInput>({
+    resolver: zodResolver(schema),
+    defaultValues,
   });
 
   const { register, handleSubmit, formState, control } = form;
@@ -40,7 +35,7 @@ export const TaskForm = ({ projectId, onSubmit, task }: Props) => {
         render={({ field }) => (
           <Select
             label="Status"
-            options={statusOptions}
+            options={mapToOptions(TASK_STATUSES)}
             value={field.value}
             onChange={(option) => field.onChange(option)}
             error={formState.errors.status && formState.errors.status.message}
@@ -53,7 +48,7 @@ export const TaskForm = ({ projectId, onSubmit, task }: Props) => {
         render={({ field }) => (
           <Select
             label="Priority"
-            options={priorityOptions}
+            options={mapToOptions(TASK_PRIORITIES)}
             value={field.value}
             onChange={(option) => field.onChange(option)}
             error={formState.errors.priority && formState.errors.priority.message}

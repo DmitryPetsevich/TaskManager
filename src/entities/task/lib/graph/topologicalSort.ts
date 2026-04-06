@@ -1,7 +1,7 @@
-import { buildDAGraph } from '@entities/task/lib/graph/buildDAGraph';
-import type { ITaskDto } from '@entities/task/model/types';
+import { buildDAGraph } from './buildDAGraph';
+import type { TaskDTO } from '../../model/types';
 
-export function topoSort(tasks: ITaskDto[]): ITaskDto[] {
+export function topologicalSort(tasks: TaskDTO[]): TaskDTO[] {
   const graph = buildDAGraph(tasks);
   const indeg: Record<string, number> = {};
   const taskMap = new Map();

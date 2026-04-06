@@ -1,9 +1,9 @@
 import { DeleteTaskButton } from '@features/task/delete-task/ui/DeleteTaskButton';
 import { UpdateTaskButton } from '@features/task/update-task/ui/UpdateTaskButton';
-import type { ITaskDto } from '@entities/task/model/types';
+import type { TaskDTO } from '@entities/task';
 
 type Props = {
-  task: ITaskDto;
+  task: TaskDTO;
 };
 
 export const TaskActionCell = ({ task }: Props) => {

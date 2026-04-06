@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { DeleteProjectButton } from '@features/project/delete-project/ui/DeleteProjectButton';
-import type { IProjectDto } from '@entities/project/model/types';
+import type { ProjectDTO } from '@entities/project';
 
 const openMock = vi.fn();
 const closeMock = vi.fn();
@@ -19,7 +19,7 @@ vi.mock('../model/useDeleteProject', () => ({
 }));
 
 describe('DeleteProjectButton', () => {
-  const project: IProjectDto = {
+  const project: ProjectDTO = {
     id: '1',
     name: 'Project Test',
     createdAt: '',

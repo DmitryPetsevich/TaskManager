@@ -1,29 +1,29 @@
 import { api } from '@shared/api/axios';
-import type { ITaskDto, UpdatedTaskDto } from '@entities/task/model/types';
+import type { TaskDTO, UpdateTaskPayload } from '../model/types';
 
 export const getTasksByProjectId = async (
   projectId: string,
   signal: AbortSignal,
-): Promise<ITaskDto[]> => {
-  const response = await api.get<ITaskDto[]>('/tasks', { params: { projectId }, signal });
+): Promise<TaskDTO[]> => {
+  const response = await api.get<TaskDTO[]>('/tasks', { params: { projectId }, signal });
 
   return response.data;
 };
 
-export const createTask = async (task: ITaskDto): Promise<ITaskDto> => {
-  const response = await api.post<ITaskDto>('/tasks', task);
+export const createTask = async (task: TaskDTO): Promise<TaskDTO> => {
+  const response = await api.post<TaskDTO>('/tasks', task);
 
   return response.data;
 };
 
-export const updateTask = async ({ id, data }: UpdatedTaskDto): Promise<ITaskDto> => {
-  const response = await api.patch<ITaskDto>(`/tasks/${id}`, data);
+export const updateTask = async ({ id, data }: UpdateTaskPayload): Promise<TaskDTO> => {
+  const response = await api.patch<TaskDTO>(`/tasks/${id}`, data);
 
   return response.data;
 };
 
-export const deleteTask = async (task: ITaskDto) => {
-  const response = await api.delete(`/tasks/${task.id}`);
+export const deleteTask = async (id: string) => {
+  const response = await api.delete(`/tasks/${id}`);
 
   return response.data;
 };

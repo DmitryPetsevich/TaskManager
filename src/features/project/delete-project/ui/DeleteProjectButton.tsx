@@ -4,10 +4,10 @@ import { IconButton } from '@shared/ui/icon-button/IconButton';
 import { useDeleteProject } from '@features/project/delete-project/model/useDeleteProject';
 import { useDialog } from '@shared/ui/dialog/useDialog';
 import { ConfirmDialog } from '@shared/ui/confirm-dialog/ConfirmDialog';
-import type { IProjectDto } from '@entities/project/model/types';
+import type { ProjectDTO } from '@entities/project';
 
 type Props = {
-  project: IProjectDto;
+  project: ProjectDTO;
 };
 
 export const DeleteProjectButton = ({ project }: Props) => {

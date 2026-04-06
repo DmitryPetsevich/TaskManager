@@ -1,4 +1,4 @@
-import type { Graph } from '@entities/task/lib/graph/buildDAGraph';
+import type { Graph } from './buildDAGraph';
 
 export function getComponents(graph: Graph) {
   const visited = new Set();

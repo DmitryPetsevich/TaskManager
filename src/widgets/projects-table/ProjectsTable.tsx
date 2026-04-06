@@ -1,11 +1,11 @@
 import { TableBuilder } from '@shared/lib/table-builder/TableBuilder';
 import { TableSkeleton } from '@shared/ui/table-skeleton/TableSkeleton';
 import { columns } from '@widgets/projects-table/ProjectsTable.config';
-import type { IProjectDto } from '@entities/project/model/types';
+import type { ProjectDTO } from '@entities/project';
 
 type Props = {
   isPendingData: boolean;
-  data: IProjectDto[];
+  data: ProjectDTO[];
 };
 
 export const ProjectsTable = ({ isPendingData, data }: Props) => {

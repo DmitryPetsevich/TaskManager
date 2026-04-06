@@ -1,9 +1,10 @@
-import type { TASK_PRIORITIES, TASK_STATUSES } from '@entities/task/model/constants';
+import type { TASK_PRIORITIES, TASK_STATUSES } from './constants';
 
-export type TaskStatus = (typeof TASK_STATUSES)[number];
-export type TaskPriority = (typeof TASK_PRIORITIES)[number];
+type TaskStatus = (typeof TASK_STATUSES)[number];
+type TaskPriority = (typeof TASK_PRIORITIES)[number];
 
-export interface ITaskDto {
+// NOTE: json-server requires full entity so I use only DTO-model
+export type TaskDTO = {
   id: string;
   projectId: string;
   name: string;
@@ -12,9 +13,9 @@ export interface ITaskDto {
   dependOn: string[];
   createdAt: string;
   updatedAt: string;
-}
+};
 
-export interface UpdatedTaskDto {
+export type UpdateTaskPayload = {
   id: string;
-  data: Partial<ITaskDto>;
-}
+  data: Partial<TaskDTO>;
+};

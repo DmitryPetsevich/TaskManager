@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import { MdEdit } from 'react-icons/md';
+import type { TaskDTO } from '@entities/task';
 import { useDialog } from '@shared/ui/dialog/useDialog';
-import type { ITaskDto } from '@entities/task/model/types';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
-import { UpdateTaskDialog } from '@features/task/update-task/ui/UpdateTaskDialog';
+import { UpdateTaskDialog } from './UpdateTaskDialog';
 
 type Props = {
-  task: ITaskDto;
+  task: TaskDTO;
 };
 
 export const UpdateTaskButton = ({ task }: Props) => {

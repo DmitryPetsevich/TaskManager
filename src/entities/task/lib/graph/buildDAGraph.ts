@@ -1,8 +1,8 @@
-import type { ITaskDto } from '@entities/task/model/types';
+import type { TaskDTO } from '../../model/types';
 
 export type Graph = Record<string, string[]>;
 
-export function buildDAGraph(tasks: ITaskDto[]): Graph {
+export function buildDAGraph(tasks: TaskDTO[]): Graph {
   const graph: Graph = {};
 
   tasks.forEach((t) => {

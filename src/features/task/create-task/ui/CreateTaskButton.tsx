@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { useCallback } from 'react';
 import { Button } from '@shared/ui/button/Button';
-import { CreateTaskDialog } from '@features/task/create-task/ui/CreateTaskDialog';
 import { useDialog } from '@shared/ui/dialog/useDialog';
+import { CreateTaskDialog } from './CreateTaskDialog';
 
 type Props = {
   projectId: string;

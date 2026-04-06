@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { CreateProjectDialog } from '@features/project/create-project/ui/create-project-dialog/CreateProjectDialog';
-import type { ProjectFormValues } from '@entities/project/model/schema';
+import type { ProjectFormInput } from '@entities/project';
 
 const closeMock = vi.fn();
 vi.mock('@shared/ui/dialog/useDialog', () => ({
@@ -15,7 +15,7 @@ vi.mock('../../model/useCreateProject', () => ({
 }));
 
 vi.mock('@entities/project/ui/ProjectForm', () => ({
-  ProjectForm: ({ onSubmit }: { onSubmit: (data: ProjectFormValues) => void }) => (
+  ProjectForm: ({ onSubmit }: { onSubmit: (data: ProjectFormInput) => void }) => (
     <button onClick={() => onSubmit({ name: 'Test Project' })}>Submit Form</button>
   ),
 }));

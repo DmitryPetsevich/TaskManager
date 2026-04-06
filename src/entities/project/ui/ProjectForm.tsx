@@ -2,16 +2,16 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@shared/ui/button/Button';
 import { TextField } from '@shared/ui/text-field/TextField';
-import { projectSchema, type ProjectFormValues } from '@entities/project/model/schema';
+import { schema, type ProjectFormInput } from '../model/schema';
 
 type Props = {
-  defaultValues?: ProjectFormValues;
-  onSubmit: (data: ProjectFormValues) => void;
+  defaultValues?: ProjectFormInput;
+  onSubmit: (data: ProjectFormInput) => void;
 };
 
 export const ProjectForm = ({ defaultValues, onSubmit }: Props) => {
-  const form = useForm<ProjectFormValues>({
-    resolver: zodResolver(projectSchema),
+  const form = useForm<ProjectFormInput>({
+    resolver: zodResolver(schema),
     defaultValues,
   });
 
