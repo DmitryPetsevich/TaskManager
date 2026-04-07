@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { PageHeader } from '@shared/ui/page-header/PageHeader';
-import { ProjectsTable } from '@widgets/projects-table/ProjectsTable';
+import { ProjectsTable } from '@widgets/projects-table';
 import { projectQueries } from '@entities/project';
 import { CreateProjectButton } from '@features/project/create-project';
 

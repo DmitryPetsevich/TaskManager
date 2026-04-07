@@ -1,7 +1,7 @@
 import type { TaskDTO } from '@entities/task';
 import { TableBuilder } from '@shared/lib/table-builder/TableBuilder';
 import { TableSkeleton } from '@shared/ui/table-skeleton/TableSkeleton';
-import { columns } from '@widgets/tasks-table/TasksTable.config';
+import { columns } from './TasksTable.config';
 
 type Props = {
   isPendingData: boolean;
@@ -9,16 +9,16 @@ type Props = {
 };
 
 export const TasksTable = ({ isPendingData, data = [] }: Props) => {
-  if (!isPendingData && !data.length) {
+  if (isPendingData) {
+    return <TableSkeleton />;
+  }
+
+  if (!data.length) {
     return (
       <div className="h-full flex items-center justify-center text-gray-500 text-3xl font-semibold">
         No tasks found
       </div>
     );
-  }
-
-  if (isPendingData && !data.length) {
-    return <TableSkeleton />;
   }
 
   return (

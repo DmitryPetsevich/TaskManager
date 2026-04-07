@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { projectQueries } from '@entities/project';
 import { taskQueries } from '@entities/task';
 import { PageHeader } from '@shared/ui/page-header/PageHeader';
-import { TasksTable } from '@widgets/tasks-table/TasksTable';
+import { TasksTable } from '@widgets/tasks-table';
 import { CreateTaskButton } from '@features/task/create-task';
 
 const ProjectDetailPage = () => {

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
-import { sidebarMenu } from '@widgets/sidebar/SidebarMenu.config';
+import { sidebarMenu } from './SidebarMenu.config';
 
 type Props = {
   collapsed: boolean;

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ProjectActionCell } from '@widgets/projects-table/ui/project-action-cell/ProjectActionCell';
 import type { ProjectDTO } from '@entities/project';
 import type { TableColumn } from '@shared/lib/table-builder/TableBuilder.types';
+import { ProjectActionCell } from './ui/project-action-cell/ProjectActionCell';
 
 export const columns = [
   {

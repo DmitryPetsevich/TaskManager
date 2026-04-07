@@ -1,6 +1,6 @@
-import { TaskActionCell } from '@widgets/tasks-table/ui/task-action-cell/TaskActionCell';
-import type { TaskDTO } from '@entities/task';
 import type { TableColumn } from '@shared/lib/table-builder/TableBuilder.types';
+import type { TaskDTO } from '@entities/task';
+import { TaskActionCell } from './ui/task-action-cell/TaskActionCell';
 
 export const columns = [
   {

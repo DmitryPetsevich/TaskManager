@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import { SidebarFooter } from '@widgets/sidebar/SidebarFooter';
-import { SidebarHeader } from '@widgets/sidebar/SidebarHeader';
-import { SidebarMenu } from '@widgets/sidebar/SidebarMenu';
+import { SidebarFooter } from './SidebarFooter';
+import { SidebarHeader } from './SidebarHeader';
+import { SidebarMenu } from './SidebarMenu';
 
 export const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);

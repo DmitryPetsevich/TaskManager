@@ -1,5 +1,5 @@
-import { Sidebar } from '@widgets/sidebar/Sidebar';
 import { Outlet } from 'react-router-dom';
+import { Sidebar } from '@widgets/sidebar';
 
 export const AppLayout = () => {
   return (

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useAuthStore } from '@entities/user';
+import { getAccessToken } from '@shared/lib/authToken';
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -9,7 +9,7 @@ export const api = axios.create({
 
 // Set fake token
 api.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().accessToken;
+  const token = getAccessToken();
 
   if (token) {
     config.headers = config.headers ?? {};

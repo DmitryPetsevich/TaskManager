@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 vi.mock('@features/auth/logout', () => ({
   LogoutButton: () => <button>Logout</button>,
 }));
-import { SidebarFooter } from '@widgets/sidebar/SidebarFooter';
+import { SidebarFooter } from './SidebarFooter';
 
 describe('SidebarFooter', () => {
   test('Should render logout button', () => {
