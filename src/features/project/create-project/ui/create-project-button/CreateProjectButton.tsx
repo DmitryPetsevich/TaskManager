@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { useDialog } from '@shared/ui/dialog/useDialog';
 import { Button } from '@shared/ui/button/Button';
-import { CreateProjectDialog } from '@features/project/create-project/ui/create-project-dialog/CreateProjectDialog';
+import { useDialog } from '@shared/ui/dialog/useDialog';
+import { CreateProjectDialog } from '../create-project-dialog/CreateProjectDialog';
 
 type Props = {
   isPulse?: boolean;

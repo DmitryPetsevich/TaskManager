@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useAuthStore } from '@features/auth/model/auth.store';
+import { useAuthStore } from '@entities/user';
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 

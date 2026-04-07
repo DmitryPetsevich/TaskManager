@@ -1,5 +1,5 @@
-import { DeleteTaskButton } from '@features/task/delete-task/ui/DeleteTaskButton';
-import { UpdateTaskButton } from '@features/task/update-task/ui/UpdateTaskButton';
+import { DeleteTaskButton } from '@features/task/delete-task';
+import { UpdateTaskButton } from '@features/task/update-task';
 import type { TaskDTO } from '@entities/task';
 
 type Props = {

@@ -9,7 +9,7 @@ export function useCreateProject() {
     onMutate: async (newProject, context) => {
       await context.client.cancelQueries({ queryKey });
 
-      const previousProjects = context.client.getQueryData(queryKey);
+      const previousProjects = context.client.getQueryData<ProjectDTO[]>(queryKey);
 
       context.client.setQueryData(queryKey, (old: ProjectDTO[] = []) => [...old, newProject]);
 

@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { DeleteProjectButton } from '@features/project/delete-project/ui/DeleteProjectButton';
 import type { ProjectDTO } from '@entities/project';
+import { DeleteProjectButton } from './DeleteProjectButton';
 
 const openMock = vi.fn();
 const closeMock = vi.fn();

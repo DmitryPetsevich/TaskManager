@@ -1,9 +1,14 @@
 import { MdClose } from 'react-icons/md';
 import { useDialog } from '@shared/ui/dialog/useDialog';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
-import { schema, TaskForm, useTaskDependencyOptions, type TaskFormInput } from '@entities/task';
+import {
+  schema,
+  TaskForm,
+  createTaskEntity,
+  useTaskDependencyOptions,
+  type TaskFormInput,
+} from '@entities/task';
 import { useCreateTask } from '../model/useCreateTask';
-import { createTaskData } from '../lib/createTaskData';
 import { createInitialValues } from '../lib/createInitialValues';
 
 type Props = {
@@ -17,7 +22,7 @@ export const CreateTaskDialog = ({ projectId }: Props) => {
   const taskDepsOptions = useTaskDependencyOptions(projectId);
 
   const handleSubmit = (data: TaskFormInput) => {
-    createTaskMutation.mutate(createTaskData(projectId, data));
+    createTaskMutation.mutate(createTaskEntity(projectId, data));
     close();
   };
 

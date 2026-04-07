@@ -8,7 +8,7 @@ const getUsers = async (): Promise<UserDTO[]> => {
   return response.data;
 };
 
-export const loginUser = async (email: string, password: string) => {
+export const loginUser = async ({ email, password }: { email: string; password: string }) => {
   const users = await getUsers();
 
   const user = users.find((u) => u.email === email && u.password === password);

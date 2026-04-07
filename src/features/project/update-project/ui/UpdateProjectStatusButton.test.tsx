@@ -1,12 +1,12 @@
-import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { UpdateProjectStatusButton } from '@features/project/update-project/ui/UpdateProjectStatusButton';
 import type { ProjectDTO } from '@entities/project';
+import { UpdateProjectStatusButton } from './UpdateProjectStatusButton';
 
 const mutateMock = vi.fn();
-vi.mock('../model/useUpdateProject', () => ({
-  useUpdateProject: () => ({ mutate: mutateMock }),
+vi.mock('../model/useUpdateProjectStatus', () => ({
+  useUpdateProjectStatus: () => ({ mutate: mutateMock }),
 }));
 
 const createMockProject = (status: ProjectDTO['status']): ProjectDTO => ({

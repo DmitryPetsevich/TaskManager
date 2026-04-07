@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from 'vitest';
-import { useAuthStore } from '@features/auth/model/auth.store';
+import { useAuthStore } from './auth.store';
 
 describe('Auth Store:', () => {
   const user = {

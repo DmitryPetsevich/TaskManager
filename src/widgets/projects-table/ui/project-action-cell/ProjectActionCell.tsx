@@ -1,6 +1,6 @@
-import { DeleteProjectButton } from '@features/project/delete-project/ui/DeleteProjectButton';
-import { UpdateProjectStatusButton } from '@features/project/update-project/ui/UpdateProjectStatusButton';
 import type { ProjectDTO } from '@entities/project';
+import { DeleteProjectButton } from '@features/project/delete-project';
+import { UpdateProjectStatusButton } from '@features/project/update-project';
 
 type Props = {
   project: ProjectDTO;

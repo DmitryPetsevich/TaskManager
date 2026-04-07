@@ -1,12 +1,11 @@
-import { buildDAGraph, checkCycle, schema, type TaskDTO } from '@entities/task';
-import { createTaskData } from '@features/task/create-task/lib/createTaskData';
+import { buildDAGraph, checkCycle, createTaskEntity, schema, type TaskDTO } from '@entities/task';
 
 export const createTaskSchema = (tasks: TaskDTO[], task: TaskDTO) =>
   schema.refine(
     (data) => {
       const newTasks = tasks.map((t) => (t.id === task?.id ? { ...t, ...data } : t));
 
-      if (!task) newTasks.push(createTaskData('tempId', data));
+      if (!task) newTasks.push(createTaskEntity('tempId', data));
 
       const graph = buildDAGraph(newTasks);
 

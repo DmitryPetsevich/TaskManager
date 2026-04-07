@@ -4,7 +4,7 @@ import { projectQueries } from '@entities/project';
 import { taskQueries } from '@entities/task';
 import { PageHeader } from '@shared/ui/page-header/PageHeader';
 import { TasksTable } from '@widgets/tasks-table/TasksTable';
-import { CreateTaskButton } from '@features/task/create-task/ui/CreateTaskButton';
+import { CreateTaskButton } from '@features/task/create-task';
 
 const ProjectDetailPage = () => {
   const params = useParams();

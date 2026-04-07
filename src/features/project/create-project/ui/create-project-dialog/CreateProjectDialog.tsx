@@ -1,9 +1,9 @@
 import { MdClose } from 'react-icons/md';
 import { useDialog } from '@shared/ui/dialog/useDialog';
-import { useCreateProject } from '@features/project/create-project/model/useCreateProject';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
 import { ProjectForm, type ProjectFormInput } from '@entities/project';
-import { createProjectData } from '@features/project/create-project/lib/createProjectData';
+import { useCreateProject } from '../../model/useCreateProject';
+import { createProjectData } from '../../lib/createProjectData';
 
 export const CreateProjectDialog = () => {
   const { close } = useDialog();

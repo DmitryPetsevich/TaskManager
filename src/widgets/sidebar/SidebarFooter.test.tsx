@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
-vi.mock('@features/auth/ui/logout-button/LogoutButton', () => ({
+import { render, screen } from '@testing-library/react';
+vi.mock('@features/auth/logout', () => ({
   LogoutButton: () => <button>Logout</button>,
 }));
 import { SidebarFooter } from '@widgets/sidebar/SidebarFooter';

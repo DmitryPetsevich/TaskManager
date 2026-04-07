@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { PageHeader } from '@shared/ui/page-header/PageHeader';
 import { ProjectsTable } from '@widgets/projects-table/ProjectsTable';
 import { projectQueries } from '@entities/project';
-import { CreateProjectButton } from '@features/project/create-project/ui/create-project-button/CreateProjectButton';
+import { CreateProjectButton } from '@features/project/create-project';
 
 const ProjectsPage = () => {
   const { data = [], isPending, isFetching, isError } = useQuery(projectQueries.list());

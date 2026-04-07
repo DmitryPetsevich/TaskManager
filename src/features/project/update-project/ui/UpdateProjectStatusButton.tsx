@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react';
 import { MdPause, MdPlayArrow } from 'react-icons/md';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
-import { useUpdateProjectStatus } from '@features/project/update-project/model/useUpdateProjectStatus';
 import type { ProjectDTO } from '@entities/project';
+import { useUpdateProjectStatus } from '../model/useUpdateProjectStatus';
 
 type Props = {
   project: ProjectDTO;

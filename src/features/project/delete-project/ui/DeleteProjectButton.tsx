@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { MdDelete } from 'react-icons/md';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
-import { useDeleteProject } from '@features/project/delete-project/model/useDeleteProject';
 import { useDialog } from '@shared/ui/dialog/useDialog';
 import { ConfirmDialog } from '@shared/ui/confirm-dialog/ConfirmDialog';
 import type { ProjectDTO } from '@entities/project';
+import { useDeleteProject } from '../model/useDeleteProject';
 
 type Props = {
   project: ProjectDTO;

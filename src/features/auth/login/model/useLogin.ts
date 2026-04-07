@@ -1,12 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import { useLoginAction } from '@features/auth/model/auth.store';
-import { loginRequest } from '@features/auth/api/auth.api';
+import { loginUser, useLoginAction } from '@entities/user';
 
 export const useLogin = () => {
   const login = useLoginAction();
 
   return useMutation({
-    mutationFn: loginRequest,
+    mutationFn: loginUser,
     onSuccess: ({ user, token }) => {
       login(user, token);
     },

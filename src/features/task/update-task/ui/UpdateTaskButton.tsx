@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { MdEdit } from 'react-icons/md';
 import type { TaskDTO } from '@entities/task';
 import { useDialog } from '@shared/ui/dialog/useDialog';
@@ -12,9 +11,5 @@ type Props = {
 export const UpdateTaskButton = ({ task }: Props) => {
   const { open } = useDialog();
 
-  const handleClick = useCallback(() => {
-    open(<UpdateTaskDialog task={task} />);
-  }, [open, task]);
-
-  return <IconButton icon={<MdEdit />} onClick={handleClick} />;
+  return <IconButton icon={<MdEdit />} onClick={() => open(<UpdateTaskDialog task={task} />)} />;
 };

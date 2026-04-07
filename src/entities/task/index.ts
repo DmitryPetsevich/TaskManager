@@ -8,6 +8,7 @@ export { buildDAGraph } from './lib/graph/buildDAGraph';
 export { checkCycle } from './lib/graph/checkCycle';
 export { useCachedTasks } from './lib/useCachedTasks';
 export { useTaskDependencyOptions } from './lib/useTaskDependencyOptions';
+export { createTaskEntity } from './lib/createTaskEntity';
 
 // model
 export { schema } from './model/schema';

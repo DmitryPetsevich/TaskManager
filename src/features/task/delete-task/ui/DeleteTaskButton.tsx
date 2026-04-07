@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 import { MdDelete } from 'react-icons/md';
 import { IconButton } from '@shared/ui/icon-button/IconButton';
 import { ConfirmDialog } from '@shared/ui/confirm-dialog/ConfirmDialog';
-import { useDeleteTask } from '@features/task/delete-task/model/useDeleteTask';
 import { useDialog } from '@shared/ui/dialog/useDialog';
 import type { TaskDTO } from '@entities/task';
+import { useDeleteTask } from '../model/useDeleteTask';
 
 type Props = {
   task: TaskDTO;
