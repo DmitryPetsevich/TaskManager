@@ -6,7 +6,7 @@ import { RootRedirect } from '@app/router/redirects/RootRedirect';
 import { AuthLayout } from '@app/layouts/AuthLayout';
 import { AppLayout } from '@app/layouts/AppLayout';
 
-import { ROUTES } from '@app/router/routes';
+import { ROUTES } from '@shared/config/routes';
 import { AppGuard } from '@app/router/guards/AppGuard';
 import { AuthGuard } from '@app/router/guards/AuthGuard';
 import { DefaultErrorElement } from '@shared/ui/default-error-element/DefaultErrorElement';

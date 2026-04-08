@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { ROUTES } from '@app/router/routes';
+import { ROUTES } from '@shared/config/routes';
 import { useAccessToken } from '@entities/user';
 
 export const RootRedirect = () => {
