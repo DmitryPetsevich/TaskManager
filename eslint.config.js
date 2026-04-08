@@ -79,6 +79,13 @@ export default defineConfig([
           caughtErrorsIgnorePattern: '^_',
         },
       ],
+
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: ['@features/*/*/*', '@entities/*/*', '@widgets/*/*'],
+        },
+      ],
     },
   },
 ]);
