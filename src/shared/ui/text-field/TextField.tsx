@@ -1,19 +1,31 @@
 import clsx from 'clsx';
-import { useId, type InputHTMLAttributes } from 'react';
+import { useId, type InputHTMLAttributes, type LabelHTMLAttributes } from 'react';
 
 type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
-  label?: string;
   error?: string;
+  label?: string;
+  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
 };
 
-export const TextField = ({ label, error, className, id, ...props }: TextFieldProps) => {
+export const TextField = ({
+  id,
+  error,
+  className,
+  label,
+  labelProps,
+  ...props
+}: TextFieldProps) => {
   const generatedId = useId();
   const inputId = id ?? generatedId;
 
   return (
-    <div className="flex flex-col gap-1 mb-2 last:mb-0">
+    <div className="flex flex-col gap-1">
       {label && (
-        <label htmlFor={inputId} className="text-sm text-gray-400">
+        <label
+          htmlFor={inputId}
+          {...labelProps}
+          className={clsx('text-sm font-medium text-gray-800', labelProps?.className)}
+        >
           {label}
         </label>
       )}
@@ -22,15 +34,16 @@ export const TextField = ({ label, error, className, id, ...props }: TextFieldPr
         {...props}
         id={inputId}
         className={clsx(
-          'w-full bg-white/20 px-4 py-2.5 border border-gray-400 rounded-sm',
+          'min-h-[40px] w-full bg-white px-3 py-1.5 border border-gray-300 rounded-sm',
+          'font-light',
           'focus:outline-none focus:ring-2 focus:ring-blue-800',
           'transition',
-          error && 'border-red-400 focus:ring-red-400',
+          error && 'border-red-500 focus:ring-red-500',
           className,
         )}
       />
 
-      {error && <span className="text-sm text-red-400">{error}</span>}
+      {error && <span className="text-sm text-red-600">{error}</span>}
     </div>
   );
 };

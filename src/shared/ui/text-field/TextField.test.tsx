@@ -31,8 +31,7 @@ describe('TextField:', () => {
 
     const textfield = screen.getByRole('textbox');
 
-    expect(textfield).toHaveClass('border-red-400');
-    expect(textfield).toHaveClass('focus:ring-red-400');
+    expect(textfield).toHaveClass('border-red-500 focus:ring-red-500');
   });
 
   test('Should merge custom className', () => {
