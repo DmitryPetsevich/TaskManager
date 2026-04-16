@@ -1,6 +1,6 @@
 export const ROUTES = {
   root: '/',
-  auth: '/auth',
+  auth: '/login',
   projects: '/projects',
   projectDetail: '/projects/:id',
   notFound: '*',

@@ -5,6 +5,7 @@ import { taskQueries } from '@entities/task';
 import { PageHeader } from '@shared/ui/page-header/PageHeader';
 import { TasksTable } from '@widgets/tasks-table';
 import { CreateTaskButton } from '@features/task/create-task';
+import { usePageTitle } from '@shared/lib/hooks/usePageTitle';
 
 const ProjectDetailPage = () => {
   const params = useParams();
@@ -13,6 +14,8 @@ const ProjectDetailPage = () => {
     ...projectQueries.detail(params.id!),
     enabled: !!params.id,
   });
+
+  usePageTitle(projectData?.name || 'Loading...');
 
   const {
     data: taskData = [],

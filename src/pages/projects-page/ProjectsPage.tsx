@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
+import { usePageTitle } from '@shared/lib/hooks/usePageTitle';
 import { PageHeader } from '@shared/ui/page-header/PageHeader';
 import { ProjectsTable } from '@widgets/projects-table';
 import { projectQueries } from '@entities/project';
 import { CreateProjectButton } from '@features/project/create-project';
 
 const ProjectsPage = () => {
+  usePageTitle('Projects');
+
   const { data = [], isPending, isFetching, isError } = useQuery(projectQueries.list());
 
   if (isError) {

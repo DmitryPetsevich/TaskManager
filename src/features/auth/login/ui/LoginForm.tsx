@@ -20,7 +20,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md flex flex-col gap-4 rounded-sm p-8 animate-[fadeIn_0.6s_ease-out]">
+    <div className="w-full max-w-md flex flex-col gap-4">
       <div className="flex justify-center">
         <div className="flex justify-center items-center bg-gray-800 w-[40px] h-[40px] border rounded-full">
           <MdChecklist size="32px" color="white" />
