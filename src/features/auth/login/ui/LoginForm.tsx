@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { MdChecklist } from 'react-icons/md';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@shared/ui/button/Button';
 import { TextField } from '@shared/ui/text-field/TextField';
@@ -19,23 +20,40 @@ export const LoginForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        {...register('email')}
-        label="Email"
-        error={formState.errors.email && formState.errors.email.message}
-      />
-      <TextField
-        {...register('password')}
-        label="Password"
-        error={formState.errors.password && formState.errors.password.message}
-      />
+    <div className="w-full max-w-md flex flex-col gap-4 rounded-sm p-8 animate-[fadeIn_0.6s_ease-out]">
+      <div className="flex justify-center">
+        <div className="flex justify-center items-center bg-gray-800 w-[40px] h-[40px] border rounded-full">
+          <MdChecklist size="32px" color="white" />
+        </div>
+      </div>
+      <h1 className="text-xl text-center text-gray-800 font-medium">Sign in to TaskManager</h1>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        {isError && (
+          <div className="flex justify-center items-center p-4 border border-gray-400 bg-red-100 rounded-sm">
+            <span className="text-sm font-light">Incorrect email or password.</span>
+          </div>
+        )}
 
-      {isError && <div className="text-red-500 text-sm">Invalid email or password</div>}
+        <TextField
+          {...register('email')}
+          label="Email"
+          error={formState.errors.email && formState.errors.email.message}
+        />
+        <TextField
+          {...register('password')}
+          label="Password"
+          error={formState.errors.password && formState.errors.password.message}
+        />
 
-      <Button type="submit" isLoading={isPending} isLoadingLabel="Signing In...">
-        Sign In
-      </Button>
-    </form>
+        <Button
+          type="submit"
+          isLoading={isPending}
+          isLoadingLabel="Signing in..."
+          variant="success"
+        >
+          Sign in
+        </Button>
+      </form>
+    </div>
   );
 };
